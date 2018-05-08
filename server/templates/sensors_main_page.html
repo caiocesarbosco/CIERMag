@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<!-- <link type="text/css" rel="stylesheet" href="file:///E:/mestrado_cont/teste_server_peripherals/static/style_teste1.css"> -->
+		<title>
+			Ciermag Peripherals Editor
+		</title>
+		
+	</head>
+
+	<body>
+		<center>
+			<img src="{{ url_for('static', filename='banner-ciermag-cores.png') }}">
+			<h1>Ciermag Peripherals</h1>
+			<h2>Sensor Page</h2>
+			<br>
+			<p> {{ message }} </p>
+			
+			<table>
+					<tr>
+						<td id="tdnormal"><p>Sensor Name</p></td>
+						<td id="tdnormal"><p>Register</p></td>
+						<td id="tdnormal"><p>Unit</p></td>
+						<td id="tdnormal"><p>Valor</p></td>						
+					</tr>
+					
+					{% for sensor in sensor_data %}
+						{% if sensor != 'timedata' %}
+							{% for ted in sensor_data[sensor] %}
+								{% for register in sensor_data[sensor][ted] %}
+									{% if register != 'name' %}
+										<tr>
+											<td id="tdnormal">{{ sensor_data[sensor][ted]['name']}}</td>
+											<td id="tdnormal">{{ sensor_data[sensor][ted][register][2] }}</td>
+											<td id="tdnormal">{{ sensor_data[sensor][ted][register][1] }}</td>
+											<td id="tdnormal">{{ sensor_data[sensor][ted][register][0][-1] }}</td>
+										</tr>
+									{% endif %}
+								{% endfor %}	
+							{% endfor %}	
+						{% endif %}
+					{% endfor %}						
+					
+					
+			</table>	
+			
+			<br>
+			<br>
+			
+			<table>
+				<tr>
+					<td id="tdnormal">
+						<a href="{{ url_for('main_page') }}"><p id="ptable">Back to Main</p></a>
+					</td>
+				</tr>
+			</table>
+			
+			<p> {{ current_time }} </p>
+			
+			<p> {{ print }}</p>
+
+		</center>
+	</body>
+</html>

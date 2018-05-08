@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<!-- <link type="text/css" rel="stylesheet" href="file:///E:/mestrado_cont/teste_server_peripherals/static/style_teste1.css"> -->
+		<title>
+			Ciermag Peripherals Editor
+		</title>
+		
+	</head>
+
+	<body>
+		<center>
+			<img src="{{ url_for('static', filename='banner-ciermag-cores.png') }}">
+			<!-- src="file:///E:/mestrado_cont/teste_server_peripherals/templates/banner-ciermag-cores.png" -->
+			<h1>Ciermag Peripherals</h1>
+			<h2>Sensor Page</h2>
+			<br>
+			<p> {{ message }} </p>
+			
+			{% for transducerid in sensor_data['sensordata'] %}
+				<p> {{ transducerid }}</p>
+				<iframe src="file:///{{ path }}{{ transducerid  }}.html" width="1000" height="1000" frameborder="0"></iframe>
+				<p>{{ path }}{{ transducerid  }}.html
+			{% endfor %}
+			<br>
+			
+			<table>
+					<tr id="odd">
+						<td id="tdnormal">
+							<a href="{{ url_for('main_page') }}"><p id="ptable">Back to Main</p></a>
+						</td>
+					</tr>
+				</table>
+			
+			<p> {{ current_time }} </p>
+			<!--
+			<p>URL</p>
+			<iframe src="http://127.0.0.1:5000/main" width="1000" height="1000" frameborder="0"></iframe>
+			<p>File</p>
+			<iframe src="file:///E:/mestrado_cont/nrt_fe_system/templates/main_page.html" width="1000" height="500" frameborder="0"></iframe>
+			<br>
+			
+			<p> {{ print }}</p>
+			
+			<div w3-include-HTML="file:///E:/mestrado_cont/nrt_fe_system/templates/main_page.html"></div>
+			<script src="w3-include-HTML.js"></script>
+			-->
+
+		</center>
+	</body>
+</html>

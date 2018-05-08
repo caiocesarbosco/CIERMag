@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<!-- <link type="text/css" rel="stylesheet" href="file:///E:/mestrado_cont/teste_server_peripherals/static/style_teste1.css"> -->
+		<title>
+			Ciermag Peripherals Editor
+		</title>
+	</head>
+
+	<body>
+		<center>
+			<img src="{{ url_for('static', filename='banner-ciermag-cores.png') }}">
+			<!-- src="file:///E:/mestrado_cont/teste_server_peripherals/templates/banner-ciermag-cores.png" -->
+			<h1>Ciermag Peripherals</h1>
+			<br>
+
+			
+			<form method="POST">
+				<table>
+					<th colspan="2">Login</th>
+					<tr id="odd">
+						<td>
+							<p id="ptable"> User: </p>
+						</td>
+						<td>
+							<input type="text" name="username">
+						</td>
+					</tr>
+					<tr id="even">
+						<td>
+							<p id="ptable"> Password </p>
+						</td>
+						<td>
+							<input type="password" name="password">
+						</td>
+					</tr>
+					<tr id="odd">
+						<td>
+							<p id="ptable">  </p>
+						</td>
+						<td>
+							<input type="submit" value="Login" >
+						</td>
+					</tr>
+				</table>
+			</form>
+			
+
+			<br>
+			<p> {{ current_time }} </p>
+			<br>
+		</center>
+	</body>
+</html>

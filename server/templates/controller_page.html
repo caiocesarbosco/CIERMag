@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<!-- <link type="text/css" rel="stylesheet" href="file:///E:/mestrado_cont/teste_server_peripherals/static/style_teste1.css"> -->
+		<title>
+			Ciermag Peripherals Editor
+		</title>
+	</head>
+
+	<body>
+		<center>
+			<img src="{{ url_for('static', filename='banner-ciermag-cores.png') }}">
+			<!-- src="file:///E:/mestrado_cont/teste_server_peripherals/templates/banner-ciermag-cores.png" -->
+			<h1>Ciermag Peripherals</h1>
+			<h2>Controller Page</h2>
+			<br>
+			<p> {{ message }} </p>
+			<p> {{ method }} </p>
+			
+			<!-- External table to hold other tables in place -->
+			<form method="POST">
+				<table id">
+					<th colspan="8">Controller Area</th>						
+					<tr>
+						<td id="tdnormal"><p>Transudcer ID</p></td>
+						<td id="tdnormal"><p>Transducer Name</p></td>
+						<td id="tdnormal"><p>Register Name</p></td>
+						<td id="tdnormal"><p>Minimum Value</p></td>
+						<td id="tdnormal"><p>Maximum Value</p></td>
+						<td id="tdnormal"><p>Unit</p></td>
+						<td id="tdnormal"><p>Actuator Value</p></td>
+						<td id="tdnormal"><p>Field</p></td>
+					</tr>
+					{% for transducer in controllers_data %}
+						{% set counter = loop.cycle('odd', 'even') %}
+						{% for register in controllers_data[transducer] %}
+							{% if register != 'name' %}
+								<tr>	
+									<td id="tdnormal" rowspan="{{ controllers_data[transducer]|length - 1 }}">{{ transducer }}</td>
+									<td id="tdnormal" rowspan="{{ controllers_data[transducer]|length - 1 }}">{{ controllers_data[transducer]['name'] }}</td>
+									<td id="tdnormal">{{ register }}</td>
+									<td id="tdnormal">{{ controllers_data[transducer][register][0] }}</td>
+									<td id="tdnormal">{{ controllers_data[transducer][register][1] }}</td>
+									<td id="tdnormal">{{ controllers_data[transducer][register][2] }}</td>
+									<td id="tdnormal">{{ controllers_data[transducer][register][3] }}</td>
+									<td id="tdnormal"><input type="text" name="{{ transducer }}&_{{ register }}"></td>
+								</tr>
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
+
+					<tr>
+						<td id="tdnormal" colspan="8">
+							<input type="submit" value="Save" >
+						</td>
+					</tr>					
+				</table>
+			</form>
+			
+			<br>
+			<br>
+			
+			<table>
+				<tr>
+					<td id="tdnormal">
+						<a href="{{ url_for('main_page') }}"><p id="ptable">Back to Main</p></a>
+					</td>
+				</tr>
+			</table>
+
+			<br>
+			<p> {{ current_time }} </p>
+			<br>
+			<p> {{ print }}</p>
+		</center>
+	</body>
+</html>

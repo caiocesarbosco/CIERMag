@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<!-- <link type="text/css" rel="stylesheet" href="file:///E:/mestrado_cont/teste_server_peripherals/static/style_teste1.css"> -->
+		<title>
+			Ciermag Peripherals Editor
+		</title>
+	</head>
+
+	<body>
+		<center>
+			<img src="{{ url_for('static', filename='banner-ciermag-cores.png') }}">
+			<!-- src="file:///E:/mestrado_cont/teste_server_peripherals/templates/banner-ciermag-cores.png" -->
+			<h1>Ciermag Peripherals</h1>
+			<br>
+			<p> {{ message }} </p>
+			
+			<p> {{ method }} </p>
+			
+			
+			<table>
+				<th>Available TEDS</th>
+				{% for tedsid in teds_dictlist %}
+					<tr>
+						<td id="tdnormal">
+							<a href="{{ url_for('editor_page', selected_teds=tedsid) }}"><p id="ptable">{{ tedsid }}: {{teds_dictlist[tedsid]}}</p></a>
+						</td>
+					</tr>
+				{% endfor %}
+				<tr>
+					<td id="tdnormal">
+						<a href="{{ url_for('editor_page', selected_teds='new_teds') }}"><p id="ptable">New TEDS</p></a>
+					</td>
+				</tr>
+
+			</table>
+			<br>
+			<br>
+			<table>
+				<th colspan="4">Transducer Area</th>
+				<tr>
+					<td id="tdnormal">
+						<a href="{{ url_for('controller_page') }}"><p id="ptable">Controllers Page</p></a>
+					</td>
+					<td id="tdnormal">
+						<a href="{{ url_for('sensor_main_page') }}"><p id="ptable">Sensors Page</p></a>
+					</td>
+					<td id="tdnormal">
+						<a href="{{ url_for('script_page') }}"><p id="ptable">Script Page</p></a>
+					</td>
+					<td id="tdnormal">
+						<a href="{{ url_for('setups_page') }}"><p id="ptable">Setups Page</p></a>
+					</td>										
+				</tr>
+			</table>
+			
+			<br>
+			<p> {{ current_time }} </p>
+			<br>
+			<p> {{ print }}</p>
+		</center>
+	</body>
+</html>

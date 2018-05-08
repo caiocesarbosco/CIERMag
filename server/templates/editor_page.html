@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<!-- <link type="text/css" rel="stylesheet" href="file:///E:/mestrado_cont/teste_server_peripherals/static/style_teste1.css"> -->
+		<title>
+			Ciermag Peripherals Editor
+		</title>
+	</head>
+
+	<body>
+		<center>
+			<img src="{{ url_for('static', filename='banner-ciermag-cores.png') }}">
+			<!-- src="file:///E:/mestrado_cont/teste_server_peripherals/templates/banner-ciermag-cores.png" -->
+			<h1>Ciermag Peripherals</h1>
+			<h2>TEDS Editor Area</h2>
+			<br>
+			<p> {{ message }} </p>
+			<p> {{ method }} </p>
+			
+			<!-- External table to hold other tables in place -->
+			<table id="external">
+				<tr>
+					<td id="tdexternal">
+						<!-- Form with a table inside-->
+						<form method="POST">
+							<table>
+								<th colspan="3">TEDS Editor Area</th>							
+								{% for field in webteds %}
+									<tr id="{{ loop.cycle('odd', 'even') }}">
+										<!-- first division: name -->
+										<td>
+										{% if field['type'] != 'group' %}
+											<p>{{ field['name'] }} </p>
+										{% endif %}
+										</td>
+										<!-- second division: value -->
+										<td>
+										{% if field['type'] != 'group' %}
+											<p id="ptablecenter">{{ field['value'] }} </p>
+										{% endif %}
+										</td>
+										<!-- third division: form input -->
+										<td>
+										{% if field['readonly'] == True %}
+										<input type="hidden" name="{{ field['name'] }}" value="{{ field['value'] }}">
+										{% else %}
+											{% if field['type'] == 'bool' %}
+												<input type="radio" name="{{ field['name'] }}" value="True" checked> True
+												<input type="radio" name="{{ field['name'] }}" value="False"> False
+											{% elif field['type'] == 'group' %}
+												<!-- do not do anything -->
+											{% else %}
+												<input type="text" name="{{ field['name'] }}" value="{{ field['value'] }}">
+											{% endif %}
+										{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+
+							{% for field in webteds %}
+								{% if field['type'] == 'group' %}
+								<tr>
+									<td id="register" colspan="2">
+									{{ field['name'] }}
+									</td>
+									<td id="seconddivs">
+										<a id="remove" href="{{ url_for('remove_register', selected_register=field['name']) }}">Remove</a>
+									</td>
+								</tr>
+								{% for subfield in field['children'] %}
+									<tr id="{{ loop.cycle('odd', 'even') }}">
+									<td>
+										<p>{{ subfield['name'] }} </p>
+									</td>
+									<td>
+										<p id="ptablecenter">{{ subfield['value'] }} </p>
+									</td>
+									<td>
+									{% if subfield['type'] == 'bool' %}
+										{% if subfield['value'] %}
+											<input type="radio" name="{{ field['name'] }}&_{{ subfield['name'] }}" value="True" checked> True
+											<input type="radio" name="{{ field['name'] }}&_{{ subfield['name'] }}" value="False"> False
+										{% else %}
+											<input type="radio" name="{{ field['name'] }}&_{{ subfield['name'] }}" value="True"> True
+											<input type="radio" name="{{ field['name'] }}&_{{ subfield['name'] }}" value="False" checked> False
+										{% endif %}
+
+									{% else %}
+										<input type="text" name="{{ field['name'] }}&_{{ subfield['name'] }}" value="{{ subfield['value'] }}">
+									{% endif %}
+								{% endfor %}
+								{% endif %}
+								{% endfor %}
+									</td>
+									</tr>
+								
+								<tr id="odd">
+									<td>
+										<p id="ptable">  </p>
+									</td>
+									<td>
+										<input type="submit" value="Save Changes" >
+									</td>
+									<td>
+										<p id="ptable">  </p>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>	
+
+			<br>
+			<br>
+				<tr>
+				<table>
+					<tr id="even">
+						<td id="tdnormal">
+						{% for field in webteds %}
+							{% if field['name'] == 'ID' %}
+							<a href="{{ url_for('add_register', selected_teds=field['value']) }}"><p id="ptable">Add Register</p></a>
+							{% endif %}
+						{% endfor%}
+						</td>
+					</tr>
+					<tr id="odd">
+						<td id="tdnormal">
+							<a href="{{ url_for('editor_page', selected_teds='new_teds') }}"><p id="ptable">New TEDS</p></a>
+						</td>
+					</tr">
+					<tr id="even">
+						<td id="tdnormal">
+							<a href="{{ url_for('editor_page', selected_teds='new_teds') }}"><p id="ptable">Copy TEDS</p></a>
+						</td>
+					</tr>
+					<tr id="odd">
+						<td id="tdnormal">
+							<a href="{{ url_for('main_page') }}"><p id="ptable">Back to Main</p></a>
+						</td>
+					</tr>
+				</table>
+				</tr>
+				
+			
+
+			<br>
+			<p> {{ current_time }} </p>
+		</center>
+	</body>
+</html>

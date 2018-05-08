@@ -1,0 +1,59 @@
+body { background-color: rgb(195,216,241); }
+
+img { height: 180px;
+	width: 500px;}
+
+table { border: 2px solid black;
+	text-align: center;
+	border-collapse: collapse;}
+
+td { border-bottom: 2px solid black; }
+
+th { color: rgb(255, 255, 255);
+	border: 2px solid black;
+	text-align: center;
+	background-color: rgb(100,100,200);
+	font-size: 20px;}
+	
+a {text-align: center;
+	font-size: 20px;}
+
+#odd { background-color: rgb(255,255,255); }
+
+#even { background-color: rgb(175,196,221); }
+
+#ptable { font-size: 100%;
+	font-family: Arial;
+	margin: 5px;}
+	
+#ptablecenter { font-size: 100%;
+	font-family: Arial;
+	margin: 5px;
+	text-align: center;}
+
+#external { border: 1px solid black;}
+
+#tdexternal { border: 1px solid black;}
+
+#tdnormal { border: 2px solid black;}
+
+#register { color: rgb(0, 0, 100);
+	border: 2px solid black;
+	text-align: center;
+	background-color: rgb(200,200,200);
+	font-size: 20px;}
+	
+#seconddivs { color: rgb(255, 0, 0);
+	border: 2px solid black;
+	text-align: center;
+	background-color: rgb(255,255,255);
+	font-size: 15px;}
+	
+#remove {text-align: center;
+	color: rgb(255, 0, 0);
+	font-size: 15px;}
+	
+	
+#rename {text-align: center;
+	color: rgb(0, 0, 255);
+	font-size: 15px;}
